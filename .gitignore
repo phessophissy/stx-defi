@@ -1,11 +1,11 @@
-# Dependencies
+﻿# Dependencies
 node_modules/
 
 # Build outputs
 dist/
 .cache/
 
-# Scripts (not tracked)
+# Scripts (contains sensitive wallet data - NEVER commit)
 scripts/
 
 # Environment and config
@@ -19,6 +19,10 @@ wallets.json
 *.wallet
 *.mnemonic
 *.seed
+funding.json
+**/funding.json
+deployer.json
+**/deployer.json
 
 # IDE
 .vscode/
@@ -36,5 +40,8 @@ npm-debug.log*
 coverage/
 .nyc_output/
 
-# Deployment keys
+# Deployment keys and settings with private data
 settings/Mainnet.toml
+
+# Config files with sensitive data
+**/config/*.json

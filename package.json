@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "generate-wallets": "ts-node scripts/generate-wallets.ts",
+    "fund-wallets": "ts-node scripts/fund-wallets.ts",
+    "deploy": "ts-node scripts/deploy.ts",
     "interact": "ts-node scripts/interact.ts",
     "liquidate": "ts-node scripts/liquidate.ts",
     "check-balances": "ts-node scripts/check-balances.ts"
