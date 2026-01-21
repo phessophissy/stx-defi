@@ -1,0 +1,24 @@
+[project]
+name = "stx-defi-protocol"
+description = "A DeFi lending, borrowing, and yield vault protocol on Stacks"
+authors = []
+telemetry = false
+cache_dir = "./.cache"
+
+[contracts.core-pool]
+path = "contracts/core-pool.clar"
+clarity_version = 2
+epoch = 2.5
+
+[contracts.yield-vault]
+path = "contracts/yield-vault.clar"
+clarity_version = 2
+epoch = 2.5
+
+[repl.analysis]
+passes = ["check_checker"]
+[repl.analysis.check_checker]
+strict = true
+trusted_sender = false
+trusted_caller = false
+callee_filter = false

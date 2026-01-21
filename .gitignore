@@ -1,0 +1,40 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+.cache/
+
+# Scripts (not tracked)
+scripts/
+
+# Environment and config
+.env
+.env.local
+.env.*.local
+
+# Wallet files (NEVER commit)
+wallets.json
+**/wallets.json
+*.wallet
+*.mnemonic
+*.seed
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Test artifacts
+coverage/
+.nyc_output/
+
+# Deployment keys
+settings/Mainnet.toml
