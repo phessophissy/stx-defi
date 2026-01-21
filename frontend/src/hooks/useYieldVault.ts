@@ -1,10 +1,10 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { getApiEndpoint, CONTRACTS, PROTOCOL_CONSTANTS } from '@/lib/contracts';
+import { PROTOCOL_CONSTANTS } from '@/lib/contracts';
 
 interface VaultStats {
-  totalDeposits: number;
+  totalStaked: number;
   totalShares: number;
   totalAssets: number;
   sharePrice: number;
@@ -19,10 +19,10 @@ interface UserVaultPosition {
 }
 
 const defaultVaultStats: VaultStats = {
-  totalDeposits: 0,
+  totalStaked: 0,
   totalShares: 0,
   totalAssets: 0,
-  sharePrice: 10000, // 1.0 in PRECISION
+  sharePrice: 10000,
   pendingYield: 0,
   apy: PROTOCOL_CONSTANTS.VAULT_YIELD_RATE,
 };
@@ -33,7 +33,7 @@ const defaultUserVaultPosition: UserVaultPosition = {
   depositBlock: 0,
 };
 
-export function useYieldVault(userAddress: string | null) {
+export function useYieldVault(userAddress?: string | null) {
   const [vaultStats, setVaultStats] = useState<VaultStats>(defaultVaultStats);
   const [userPosition, setUserPosition] = useState<UserVaultPosition>(defaultUserVaultPosition);
   const [isLoading, setIsLoading] = useState(true);
@@ -41,15 +41,12 @@ export function useYieldVault(userAddress: string | null) {
 
   const fetchVaultStats = useCallback(async () => {
     try {
-      const endpoint = getApiEndpoint();
-      
-      // For demo, use mock data
       setVaultStats({
-        totalDeposits: 500000000000, // 500K STX
-        totalShares: 480000000000,   // Slightly less shares due to yield
-        totalAssets: 520000000000,   // Including accrued yield
-        sharePrice: 10833,           // 1.0833 (8.33% yield)
-        pendingYield: 20000000000,   // 20K STX yield
+        totalStaked: 500000000000,
+        totalShares: 480000000000,
+        totalAssets: 520000000000,
+        sharePrice: 10833,
+        pendingYield: 20000000000,
         apy: PROTOCOL_CONSTANTS.VAULT_YIELD_RATE,
       });
     } catch (err) {
@@ -65,10 +62,9 @@ export function useYieldVault(userAddress: string | null) {
     }
 
     try {
-      // Mock data for demo
       setUserPosition({
-        shares: 50000000000,  // 50K shares
-        value: 54165000000,   // ~54.16K STX value
+        shares: 50000000000,
+        value: 54165000000,
         depositBlock: 150000,
       });
     } catch (err) {
@@ -84,7 +80,6 @@ export function useYieldVault(userAddress: string | null) {
       await Promise.all([fetchVaultStats(), fetchUserPosition()]);
       setIsLoading(false);
     };
-
     fetchData();
   }, [fetchVaultStats, fetchUserPosition]);
 

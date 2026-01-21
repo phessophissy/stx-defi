@@ -5,8 +5,12 @@ import { useCorePool, useYieldVault } from '@/hooks';
 import { BarChart3 } from 'lucide-react';
 
 export default function AnalyticsPage() {
-  const { totalDeposits, totalBorrows } = useCorePool();
-  const { totalStaked } = useYieldVault();
+  const { poolStats } = useCorePool();
+  const { vaultStats } = useYieldVault();
+
+  const totalDeposits = poolStats?.totalDeposits || 0;
+  const totalBorrows = poolStats?.totalBorrows || 0;
+  const totalStaked = vaultStats?.totalStaked || 0;
 
   const utilization = totalDeposits > 0 ? (totalBorrows / totalDeposits) * 100 : 0;
 

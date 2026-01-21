@@ -188,7 +188,7 @@ export default function LiquidatePage() {
                           </p>
                         </div>
                         <Button
-                          variant="destructive"
+                          variant="danger"
                           size="sm"
                           onClick={() => handleLiquidate(position.address)}
                           disabled={isLiquidating || !isConnected}

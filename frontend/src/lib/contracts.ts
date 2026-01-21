@@ -12,6 +12,16 @@ export const CONTRACTS = {
   },
 } as const;
 
+// Export contract names for hooks
+export const CORE_POOL_CONTRACT = CONTRACTS.CORE_POOL.name;
+export const YIELD_VAULT_CONTRACT = CONTRACTS.YIELD_VAULT.name;
+
+// Contract addresses by network
+export const CONTRACT_ADDRESSES: Record<string, string> = {
+  mainnet: 'SP2ZNGJ85ENDY6QRHQ5P2D4FXKGZWCKTB2T0Z55KS',
+  testnet: 'ST1PQHQKV0RJXZFY1DGX8MNSNYVE3VGZJSRTPGZGM',
+};
+
 // Protocol constants matching smart contracts
 export const PROTOCOL_CONSTANTS = {
   COLLATERAL_RATIO: 150, // 150% collateralization required

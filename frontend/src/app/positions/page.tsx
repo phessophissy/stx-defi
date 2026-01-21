@@ -20,12 +20,18 @@ import clsx from 'clsx';
 
 export default function PositionsPage() {
   const { isConnected, address, connect } = useWallet();
-  const { userDeposit, userBorrow, healthFactor, isLoading: isPoolLoading, refetch: refetchPool } = useCorePool();
-  const { userShares, sharePrice, isLoading: isVaultLoading, refetch: refetchVault } = useYieldVault();
+  const { userPosition, poolStats, isLoading: isPoolLoading, refetch: refetchPool } = useCorePool(address);
+  const { userPosition: vaultPosition, vaultStats, isLoading: isVaultLoading, refetch: refetchVault } = useYieldVault(address);
   const [isRefreshing, setIsRefreshing] = useState(false);
 
+  const userDeposit = userPosition?.deposit || 0;
+  const userBorrow = userPosition?.borrow || 0;
+  const healthFactor = userPosition?.healthFactor || 9999;
+  const userShares = vaultPosition?.shares || 0;
+  const sharePrice = vaultStats?.sharePrice || 10000;
+
   const healthStatus = getHealthStatus(healthFactor);
-  const vaultValue = Math.floor((userShares * sharePrice) / 100);
+  const vaultValue = Math.floor((userShares * sharePrice) / 10000);
   const netPosition = userDeposit - userBorrow + vaultValue;
   const hasLendingPosition = userDeposit > 0 || userBorrow > 0;
   const hasVaultPosition = userShares > 0;
@@ -57,7 +63,6 @@ export default function PositionsPage() {
 
   return (
     <div className="container mx-auto px-4 py-8 space-y-8">
-      {/* Page Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold flex items-center gap-3">
@@ -78,16 +83,13 @@ export default function PositionsPage() {
         </Button>
       </div>
 
-      {/* Net Position Overview */}
       <Card className="bg-gradient-to-br from-[var(--primary)]/10 to-[var(--secondary)]">
         <CardContent className="pt-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
             <div className="md:col-span-1">
               <p className="text-sm text-[var(--muted-foreground)] mb-1">Net Position</p>
               <p className="text-3xl font-bold">{formatSTX(netPosition)} STX</p>
-              <p className="text-sm text-[var(--muted-foreground)]">
-                Total value across all positions
-              </p>
+              <p className="text-sm text-[var(--muted-foreground)]">Total value across all positions</p>
             </div>
             <div>
               <p className="text-sm text-[var(--muted-foreground)] mb-1">Total Supplied</p>
@@ -111,7 +113,6 @@ export default function PositionsPage() {
         </CardContent>
       </Card>
 
-      {/* Lending Position */}
       <Card>
         <CardHeader>
           <div className="flex items-center justify-between">
@@ -144,7 +145,6 @@ export default function PositionsPage() {
           ) : (
             <div className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {/* Deposit Card */}
                 <div className="p-4 bg-[var(--secondary)] rounded-lg border border-[var(--border)]">
                   <div className="flex items-center gap-2 mb-3">
                     <div className="p-2 bg-[var(--success)]/10 rounded-lg">
@@ -153,12 +153,8 @@ export default function PositionsPage() {
                     <span className="text-sm text-[var(--muted-foreground)]">Deposited</span>
                   </div>
                   <p className="text-2xl font-bold">{formatSTX(userDeposit)} STX</p>
-                  <p className="text-xs text-[var(--muted-foreground)] mt-1">
-                    Earning 5% APY
-                  </p>
+                  <p className="text-xs text-[var(--muted-foreground)] mt-1">Earning 5% APY</p>
                 </div>
-
-                {/* Borrow Card */}
                 <div className="p-4 bg-[var(--secondary)] rounded-lg border border-[var(--border)]">
                   <div className="flex items-center gap-2 mb-3">
                     <div className="p-2 bg-[var(--warning)]/10 rounded-lg">
@@ -167,18 +163,11 @@ export default function PositionsPage() {
                     <span className="text-sm text-[var(--muted-foreground)]">Borrowed</span>
                   </div>
                   <p className="text-2xl font-bold">{formatSTX(userBorrow)} STX</p>
-                  <p className="text-xs text-[var(--muted-foreground)] mt-1">
-                    5% APY interest
-                  </p>
+                  <p className="text-xs text-[var(--muted-foreground)] mt-1">5% APY interest</p>
                 </div>
-
-                {/* Health Factor Card */}
                 <div className="p-4 bg-[var(--secondary)] rounded-lg border border-[var(--border)]">
                   <div className="flex items-center gap-2 mb-3">
-                    <div
-                      className="p-2 rounded-lg"
-                      style={{ backgroundColor: `${healthStatus.color}20` }}
-                    >
+                    <div className="p-2 rounded-lg" style={{ backgroundColor: `${healthStatus.color}20` }}>
                       {healthFactor < 120 ? (
                         <AlertTriangle className="w-4 h-4" style={{ color: healthStatus.color }} />
                       ) : (
@@ -190,40 +179,14 @@ export default function PositionsPage() {
                   <p className="text-2xl font-bold" style={{ color: healthStatus.color }}>
                     {userBorrow > 0 ? formatHealthFactor(healthFactor) : '∞'}
                   </p>
-                  <p className="text-xs text-[var(--muted-foreground)] mt-1">
-                    {healthStatus.label}
-                  </p>
+                  <p className="text-xs text-[var(--muted-foreground)] mt-1">{healthStatus.label}</p>
                 </div>
               </div>
-
-              {/* Health Warning */}
-              {userBorrow > 0 && healthFactor < 150 && (
-                <div
-                  className="p-4 rounded-lg border flex items-start gap-3"
-                  style={{
-                    backgroundColor: `${healthStatus.color}10`,
-                    borderColor: healthStatus.color,
-                  }}
-                >
-                  <AlertTriangle className="w-5 h-5 flex-shrink-0" style={{ color: healthStatus.color }} />
-                  <div>
-                    <p className="font-medium" style={{ color: healthStatus.color }}>
-                      {healthFactor < 120 ? 'Liquidation Risk!' : 'Low Health Factor'}
-                    </p>
-                    <p className="text-sm text-[var(--muted-foreground)]">
-                      {healthFactor < 120
-                        ? 'Your position can be liquidated. Repay debt or add collateral immediately.'
-                        : 'Consider repaying some debt or adding more collateral to improve your health factor.'}
-                    </p>
-                  </div>
-                </div>
-              )}
             </div>
           )}
         </CardContent>
       </Card>
 
-      {/* Vault Position */}
       <Card>
         <CardHeader>
           <div className="flex items-center justify-between">
@@ -263,11 +226,8 @@ export default function PositionsPage() {
                   <span className="text-sm text-[var(--muted-foreground)]">Vault Shares</span>
                 </div>
                 <p className="text-2xl font-bold">{(userShares / 1e6).toFixed(4)}</p>
-                <p className="text-xs text-[var(--muted-foreground)] mt-1">
-                  Your ownership stake
-                </p>
+                <p className="text-xs text-[var(--muted-foreground)] mt-1">Your ownership stake</p>
               </div>
-
               <div className="p-4 bg-[var(--secondary)] rounded-lg border border-[var(--border)]">
                 <div className="flex items-center gap-2 mb-3">
                   <div className="p-2 bg-[var(--success)]/10 rounded-lg">
@@ -277,10 +237,9 @@ export default function PositionsPage() {
                 </div>
                 <p className="text-2xl font-bold text-[var(--success)]">{formatSTX(vaultValue)} STX</p>
                 <p className="text-xs text-[var(--muted-foreground)] mt-1">
-                  @ {(sharePrice / 100).toFixed(4)} STX/share
+                  @ {(sharePrice / 10000).toFixed(4)} STX/share
                 </p>
               </div>
-
               <div className="p-4 bg-[var(--secondary)] rounded-lg border border-[var(--border)]">
                 <div className="flex items-center gap-2 mb-3">
                   <div className="p-2 bg-[var(--warning)]/10 rounded-lg">
@@ -289,9 +248,7 @@ export default function PositionsPage() {
                   <span className="text-sm text-[var(--muted-foreground)]">APY</span>
                 </div>
                 <p className="text-2xl font-bold">8.00%</p>
-                <p className="text-xs text-[var(--muted-foreground)] mt-1">
-                  Annual yield rate
-                </p>
+                <p className="text-xs text-[var(--muted-foreground)] mt-1">Annual yield rate</p>
               </div>
             </div>
           )}

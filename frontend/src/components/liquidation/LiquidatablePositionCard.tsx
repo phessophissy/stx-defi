@@ -116,7 +116,7 @@ export default function LiquidatablePositionCard({
                 </p>
               </div>
               <Button
-                variant="destructive"
+                variant="danger"
                 size="sm"
                 onClick={(e) => {
                   e.stopPropagation();

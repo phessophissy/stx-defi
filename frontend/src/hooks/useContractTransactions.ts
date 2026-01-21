@@ -1,10 +1,6 @@
 import { useCallback } from 'react';
 import { openContractCall } from '@stacks/connect';
-import {
-  uintCV,
-  AbiTypeTo,
-  PostConditionMode,
-} from '@stacks/transactions';
+import { uintCV, PostConditionMode } from '@stacks/transactions';
 import { CONTRACT_ADDRESSES, CORE_POOL_CONTRACT, YIELD_VAULT_CONTRACT } from '@/lib/contracts';
 import { parseSTX } from '@/lib/utils';
 import { useWallet } from '@/context/WalletContext';
@@ -15,11 +11,10 @@ interface TransactionOptions {
 }
 
 export function useContractTransactions() {
-  const { isConnected, network } = useWallet();
+  const { isConnected } = useWallet();
 
-  const contractAddress = CONTRACT_ADDRESSES[network];
+  const contractAddress = CONTRACT_ADDRESSES.testnet;
 
-  // Core Pool - Deposit
   const deposit = useCallback(
     async (amount: string, options?: TransactionOptions) => {
       if (!isConnected) throw new Error('Wallet not connected');
@@ -41,7 +36,6 @@ export function useContractTransactions() {
     [isConnected, contractAddress]
   );
 
-  // Core Pool - Withdraw
   const withdraw = useCallback(
     async (amount: string, options?: TransactionOptions) => {
       if (!isConnected) throw new Error('Wallet not connected');
@@ -63,7 +57,6 @@ export function useContractTransactions() {
     [isConnected, contractAddress]
   );
 
-  // Core Pool - Borrow
   const borrow = useCallback(
     async (amount: string, options?: TransactionOptions) => {
       if (!isConnected) throw new Error('Wallet not connected');
@@ -85,7 +78,6 @@ export function useContractTransactions() {
     [isConnected, contractAddress]
   );
 
-  // Core Pool - Repay
   const repay = useCallback(
     async (amount: string, options?: TransactionOptions) => {
       if (!isConnected) throw new Error('Wallet not connected');
@@ -107,7 +99,6 @@ export function useContractTransactions() {
     [isConnected, contractAddress]
   );
 
-  // Yield Vault - Deposit
   const vaultDeposit = useCallback(
     async (amount: string, options?: TransactionOptions) => {
       if (!isConnected) throw new Error('Wallet not connected');
@@ -129,7 +120,6 @@ export function useContractTransactions() {
     [isConnected, contractAddress]
   );
 
-  // Yield Vault - Withdraw
   const vaultWithdraw = useCallback(
     async (shares: number, options?: TransactionOptions) => {
       if (!isConnected) throw new Error('Wallet not connected');
@@ -149,7 +139,6 @@ export function useContractTransactions() {
     [isConnected, contractAddress]
   );
 
-  // Yield Vault - Withdraw All
   const vaultWithdrawAll = useCallback(
     async (options?: TransactionOptions) => {
       if (!isConnected) throw new Error('Wallet not connected');
