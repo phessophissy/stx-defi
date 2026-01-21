@@ -1,5 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { Providers } from './providers';
+import { Header, Footer } from '@/components/layout';
 
 export const metadata: Metadata = {
   title: 'STX DeFi Protocol',
@@ -16,8 +18,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="min-h-screen bg-[var(--background)] antialiased">
-        {children}
+      <body className="min-h-screen bg-[var(--background)] antialiased flex flex-col">
+        <Providers>
+          <Header />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </Providers>
       </body>
     </html>
   );
