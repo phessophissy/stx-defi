@@ -99,10 +99,10 @@ a {
 /* Animation */
 @keyframes pulse-glow {
   0%, 100% {
-    box-shadow: 0 0 20px rgba(249, 115, 22, 0.3);
+    box-shadow: 0 0 20px rgba(196, 149, 106, 0.3);
   }
   50% {
-    box-shadow: 0 0 30px rgba(249, 115, 22, 0.5);
+    box-shadow: 0 0 30px rgba(196, 149, 106, 0.5);
   }
 }
 
