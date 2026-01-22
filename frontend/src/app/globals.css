@@ -156,3 +156,11 @@ a {
   backdrop-filter: blur(8px);
   border: 1px solid rgba(196, 149, 106, 0.2);
 }
+
+.bouncing-ball-container {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  z-index: 50;
+  pointer-events: none;
+}
