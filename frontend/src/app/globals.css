@@ -197,6 +197,21 @@ a {
   }
 }
 
+@keyframes bounce-diagonal {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(20px, -60px);
+  }
+  50% {
+    transform: translate(40px, -80px);
+  }
+  75% {
+    transform: translate(20px, -40px);
+  }
+}
+
 .bouncing-ball {
   width: 60px;
   height: 60px;
