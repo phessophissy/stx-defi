@@ -385,3 +385,15 @@ a {
   box-shadow: 0 4px 20px rgba(196, 149, 106, 0.3);
   transform: translateY(-1px);
 }
+
+.btn-carton-outline {
+  background: transparent;
+  border: 1px solid var(--carton-medium);
+  color: var(--carton-light);
+  transition: all 0.2s ease;
+}
+
+.btn-carton-outline:hover {
+  background: rgba(196, 149, 106, 0.1);
+  border-color: var(--carton-light);
+}
