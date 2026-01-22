@@ -2,9 +2,10 @@
 
 interface BouncingBallProps {
   size?: 'sm' | 'md' | 'lg';
+  delay?: number;
 }
 
-export function BouncingBall({ size = 'md' }: BouncingBallProps) {
+export function BouncingBall({ size = 'md', delay = 0 }: BouncingBallProps) {
   const sizeClasses = {
     sm: 'w-8 h-8',
     md: 'w-14 h-14',
@@ -13,7 +14,10 @@ export function BouncingBall({ size = 'md' }: BouncingBallProps) {
 
   return (
     <div className="bouncing-ball-container">
-      <div className={`bouncing-ball ${sizeClasses[size]}`} />
+      <div 
+        className={`bouncing-ball ${sizeClasses[size]}`}
+        style={{ animationDelay: `${delay}ms` }}
+      />
     </div>
   );
 }
