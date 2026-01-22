@@ -187,3 +187,10 @@ a {
   animation-delay: 0ms;
   background: rgba(232, 201, 168, 0.25);
 }
+
+.ball-2 {
+  width: 55px;
+  height: 55px;
+  animation-delay: 150ms;
+  background: rgba(196, 149, 106, 0.3);
+}
