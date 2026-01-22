@@ -23,6 +23,11 @@
   --input: #3d2a14;
   --ring: #c4956a;
   --radius: 0.75rem;
+  
+  /* Carton brown theme specific */
+  --carton-light: #e8c9a8;
+  --carton-medium: #c4956a;
+  --carton-dark: #8b6340;
 }
 
 * {
