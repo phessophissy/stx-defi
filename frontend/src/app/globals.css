@@ -69,6 +69,13 @@ a {
   background: var(--muted-foreground);
 }
 
+/* Carton brown background texture */
+.carton-texture {
+  background-image: 
+    radial-gradient(circle at 25% 25%, rgba(196, 149, 106, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 75% 75%, rgba(232, 201, 168, 0.02) 0%, transparent 50%);
+}
+
 /* Gradient text */
 .gradient-text {
   background: linear-gradient(135deg, #c4956a 0%, #d4a574 50%, #e8c9a8 100%);
