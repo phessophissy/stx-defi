@@ -397,3 +397,17 @@ a {
   background: rgba(196, 149, 106, 0.1);
   border-color: var(--carton-light);
 }
+
+/* Carton input styles */
+.input-carton {
+  background: rgba(45, 31, 15, 0.5);
+  border: 1px solid rgba(196, 149, 106, 0.2);
+  color: var(--foreground);
+  transition: all 0.2s ease;
+}
+
+.input-carton:focus {
+  border-color: var(--carton-medium);
+  box-shadow: 0 0 0 2px rgba(196, 149, 106, 0.1);
+  outline: none;
+}
