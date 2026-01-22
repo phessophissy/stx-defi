@@ -213,3 +213,14 @@ a {
   animation-delay: 300ms;
   background: rgba(139, 99, 64, 0.35);
 }
+
+.floating-ball {
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, 
+    rgba(232, 201, 168, 0.4) 0%, 
+    rgba(196, 149, 106, 0.2) 50%,
+    rgba(139, 99, 64, 0.1) 100%);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(196, 149, 106, 0.15);
+  transition: transform 0.1s ease-out;
+}
