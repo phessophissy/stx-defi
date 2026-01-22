@@ -153,4 +153,6 @@ a {
   border-radius: 50%;
   background: rgba(196, 149, 106, 0.3);
   animation: bounce 1s infinite;
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(196, 149, 106, 0.2);
 }
