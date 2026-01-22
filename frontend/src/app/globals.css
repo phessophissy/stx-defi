@@ -318,3 +318,12 @@ a {
 .border-carton-dark {
   border-color: var(--carton-dark);
 }
+
+/* Carton gradient backgrounds */
+.gradient-carton {
+  background: linear-gradient(135deg, var(--carton-light) 0%, var(--carton-medium) 50%, var(--carton-dark) 100%);
+}
+
+.gradient-carton-subtle {
+  background: linear-gradient(145deg, rgba(196, 149, 106, 0.1) 0%, rgba(139, 99, 64, 0.05) 100%);
+}
