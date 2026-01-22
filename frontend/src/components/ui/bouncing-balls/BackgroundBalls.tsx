@@ -2,10 +2,19 @@
 
 import { BouncingBallsDecor } from './BouncingBallsDecor';
 
-export function BackgroundBalls() {
+interface BackgroundBallsProps {
+  showLeft?: boolean;
+  showRight?: boolean;
+}
+
+export function BackgroundBalls({ 
+  showLeft = false, 
+  showRight = true 
+}: BackgroundBallsProps) {
   return (
     <>
-      <BouncingBallsDecor />
+      {showRight && <BouncingBallsDecor position="bottom-right" />}
+      {showLeft && <BouncingBallsDecor position="bottom-left" />}
     </>
   );
 }
