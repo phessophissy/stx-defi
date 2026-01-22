@@ -171,6 +171,7 @@ a {
   animation: bounce 1s infinite;
   backdrop-filter: blur(8px);
   border: 1px solid rgba(196, 149, 106, 0.2);
+  box-shadow: 0 4px 20px rgba(196, 149, 106, 0.15);
 }
 
 .bouncing-ball-container {
