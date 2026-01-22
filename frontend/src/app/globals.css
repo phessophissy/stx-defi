@@ -194,3 +194,10 @@ a {
   animation-delay: 150ms;
   background: rgba(196, 149, 106, 0.3);
 }
+
+.ball-3 {
+  width: 35px;
+  height: 35px;
+  animation-delay: 300ms;
+  background: rgba(139, 99, 64, 0.35);
+}
