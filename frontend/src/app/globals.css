@@ -101,6 +101,11 @@ a {
   box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
 }
 
+/* Carton glow */
+.glow-carton {
+  box-shadow: 0 0 20px rgba(196, 149, 106, 0.3);
+}
+
 /* Animation */
 @keyframes pulse-glow {
   0%, 100% {
