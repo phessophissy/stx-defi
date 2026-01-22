@@ -223,6 +223,14 @@ a {
   box-shadow: 0 4px 20px rgba(196, 149, 106, 0.15);
 }
 
+.bouncing-ball-slow {
+  animation: bounce 1.5s infinite ease-in-out;
+}
+
+.bouncing-ball-fast {
+  animation: bounce 0.6s infinite;
+}
+
 .bouncing-ball-container {
   position: fixed;
   bottom: 40px;
