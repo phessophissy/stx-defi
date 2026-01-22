@@ -327,3 +327,13 @@ a {
 .gradient-carton-subtle {
   background: linear-gradient(145deg, rgba(196, 149, 106, 0.1) 0%, rgba(139, 99, 64, 0.05) 100%);
 }
+
+/* Ball shadow animation */
+@keyframes ball-shadow-pulse {
+  0%, 100% {
+    box-shadow: 0 4px 20px rgba(196, 149, 106, 0.15);
+  }
+  50% {
+    box-shadow: 0 8px 30px rgba(196, 149, 106, 0.25);
+  }
+}
