@@ -74,7 +74,7 @@ a {
 
 /* Glass effect */
 .glass {
-  background: rgba(20, 20, 20, 0.8);
+  background: rgba(45, 31, 15, 0.8);
   backdrop-filter: blur(12px);
   border: 1px solid var(--border);
 }
