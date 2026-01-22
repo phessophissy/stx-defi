@@ -281,3 +281,16 @@ a {
   border: 1px solid rgba(196, 149, 106, 0.15);
   transition: transform 0.1s ease-out;
 }
+
+/* Carton brown utility classes */
+.bg-carton {
+  background-color: var(--carton-medium);
+}
+
+.bg-carton-light {
+  background-color: var(--carton-light);
+}
+
+.bg-carton-dark {
+  background-color: var(--carton-dark);
+}
