@@ -354,3 +354,17 @@ a {
     transform: translateY(0) rotate(360deg);
   }
 }
+
+.bouncing-ball-rotate {
+  animation: bounce-rotate 1.5s ease-in-out infinite;
+}
+
+/* Scale bounce animation */
+@keyframes bounce-scale {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-70px) scale(1.1);
+  }
+}
