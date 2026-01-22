@@ -368,3 +368,20 @@ a {
     transform: translateY(-70px) scale(1.1);
   }
 }
+
+.bouncing-ball-scale {
+  animation: bounce-scale 1.2s ease-in-out infinite;
+}
+
+/* Carton button styles */
+.btn-carton {
+  background: linear-gradient(135deg, var(--carton-medium) 0%, var(--carton-dark) 100%);
+  color: white;
+  border: none;
+  transition: all 0.2s ease;
+}
+
+.btn-carton:hover {
+  box-shadow: 0 4px 20px rgba(196, 149, 106, 0.3);
+  transform: translateY(-1px);
+}
