@@ -136,6 +136,11 @@ a {
   border: 1px solid rgba(196, 149, 106, 0.2);
 }
 
+.carton-card-hover:hover {
+  border-color: rgba(196, 149, 106, 0.4);
+  box-shadow: 0 8px 32px rgba(196, 149, 106, 0.1);
+}
+
 /* Stat card hover */
 .stat-card {
   transition: all 0.2s ease;
