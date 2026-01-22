@@ -306,3 +306,15 @@ a {
 .text-carton-dark {
   color: var(--carton-dark);
 }
+
+.border-carton {
+  border-color: var(--carton-medium);
+}
+
+.border-carton-light {
+  border-color: var(--carton-light);
+}
+
+.border-carton-dark {
+  border-color: var(--carton-dark);
+}
