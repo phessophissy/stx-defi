@@ -81,7 +81,11 @@ a {
 
 /* Glow effects */
 .glow-orange {
-  box-shadow: 0 0 20px rgba(249, 115, 22, 0.3);
+  box-shadow: 0 0 20px rgba(196, 149, 106, 0.3);
+}
+
+.glow-brown {
+  box-shadow: 0 0 20px rgba(212, 165, 116, 0.3);
 }
 
 .glow-green {
