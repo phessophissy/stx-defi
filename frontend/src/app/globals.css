@@ -84,6 +84,12 @@ a {
   border: 1px solid var(--border);
 }
 
+.glass-carton {
+  background: rgba(45, 31, 15, 0.6);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(196, 149, 106, 0.15);
+}
+
 /* Glow effects */
 .glow-orange {
   box-shadow: 0 0 20px rgba(196, 149, 106, 0.3);
