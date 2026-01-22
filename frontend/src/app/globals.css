@@ -341,3 +341,16 @@ a {
 .bouncing-ball-glow {
   animation: bounce 1s infinite, ball-shadow-pulse 2s infinite;
 }
+
+/* Rotating bounce animation */
+@keyframes bounce-rotate {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-80px) rotate(180deg);
+  }
+  100% {
+    transform: translateY(0) rotate(360deg);
+  }
+}
