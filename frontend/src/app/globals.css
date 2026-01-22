@@ -180,3 +180,10 @@ a {
   gap: 20px;
   align-items: flex-end;
 }
+
+.ball-1 {
+  width: 40px;
+  height: 40px;
+  animation-delay: 0ms;
+  background: rgba(232, 201, 168, 0.25);
+}
