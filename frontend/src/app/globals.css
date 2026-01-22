@@ -294,3 +294,15 @@ a {
 .bg-carton-dark {
   background-color: var(--carton-dark);
 }
+
+.text-carton {
+  color: var(--carton-medium);
+}
+
+.text-carton-light {
+  color: var(--carton-light);
+}
+
+.text-carton-dark {
+  color: var(--carton-dark);
+}
