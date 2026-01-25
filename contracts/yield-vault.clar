@@ -1,4 +1,4 @@
-;; STX DeFi Yield Vault Contract
+﻿;; STX DeFi Yield Vault Contract
 ;; Handles yield generation for deposited STX
 ;; Mainnet deployment
 
@@ -157,21 +157,21 @@
   )
     (asserts! (var-get is-initialized) ERR_NOT_INITIALIZED)
     (asserts! (>= amount MIN_DEPOSIT) ERR_INVALID_AMOUNT)
-    
+
     ;; Update yield before deposit
     (update-yield)
-    
+
     ;; Transfer STX to vault
     (try! (stx-transfer? amount tx-sender (as-contract tx-sender)))
-    
+
     ;; Mint shares to user
     (map-set user-shares tx-sender (+ current-shares shares-to-mint))
     (map-set user-deposit-block tx-sender block-height)
-    
+
     ;; Update totals
     (var-set total-vault-deposits (+ (var-get total-vault-deposits) amount))
     (var-set total-shares (+ (var-get total-shares) shares-to-mint))
-    
+
     (ok {
       deposited: amount,
       shares-minted: shares-to-mint,
@@ -181,8 +181,10 @@
 )
 
 ;; Withdraw STX from the vault
+;; CRITICAL FIX: Capture user principal before as-contract context switch
 (define-public (vault-withdraw (shares uint))
   (let (
+    (user tx-sender)
     (current-shares (get-user-shares tx-sender))
     (stx-to-withdraw (calculate-stx-for-shares shares))
     (vault-balance (var-get total-vault-deposits))
@@ -191,29 +193,29 @@
     (asserts! (> shares u0) ERR_INVALID_AMOUNT)
     (asserts! (<= shares current-shares) ERR_INSUFFICIENT_BALANCE)
     (asserts! (<= stx-to-withdraw vault-balance) ERR_VAULT_EMPTY)
-    
+
     ;; Update yield before withdrawal
     (update-yield)
-    
+
     ;; Burn shares
     (let (
       (new-shares (- current-shares shares))
     )
       (if (is-eq new-shares u0)
         (begin
-          (map-delete user-shares tx-sender)
-          (map-delete user-deposit-block tx-sender)
+          (map-delete user-shares user)
+          (map-delete user-deposit-block user)
         )
-        (map-set user-shares tx-sender new-shares)
+        (map-set user-shares user new-shares)
       )
-      
+
       ;; Update totals
       (var-set total-shares (- (var-get total-shares) shares))
       (var-set total-vault-deposits (- (var-get total-vault-deposits) stx-to-withdraw))
-      
-      ;; Transfer STX to user
-      (try! (as-contract (stx-transfer? stx-to-withdraw tx-sender tx-sender)))
-      
+
+      ;; Transfer STX to user (FIXED: now correctly sends to user, not tx-sender which is contract inside as-contract)
+      (try! (as-contract (stx-transfer? stx-to-withdraw tx-sender user)))
+
       (ok {
         withdrawn: stx-to-withdraw,
         shares-burned: shares,
@@ -239,13 +241,13 @@
   (begin
     (asserts! (is-authorized) ERR_UNAUTHORIZED)
     (asserts! (> amount u0) ERR_INVALID_AMOUNT)
-    
+
     ;; Transfer yield to vault
     (try! (stx-transfer? amount tx-sender (as-contract tx-sender)))
-    
+
     ;; Add to accumulated yield
     (var-set accumulated-yield (+ (var-get accumulated-yield) amount))
-    
+
     (ok amount)
   )
 )

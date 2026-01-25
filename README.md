@@ -1,4 +1,4 @@
-# STX DeFi Protocol
+﻿# STX DeFi Protocol
 
 A decentralized lending, borrowing, and yield vault protocol built on Stacks (Bitcoin L2).
 
@@ -129,6 +129,39 @@ clarinet deployments apply --mainnet
 - Liquidation mechanism protects lenders from bad debt
 - Protocol fees ensure sustainability
 - Emergency functions available for contract owner
+
+### Clarity Smart Contract Security Best Practices
+
+When working with Clarity smart contracts, be aware of these critical patterns:
+
+1. **as-contract Context Switching**: When using `(as-contract ...)`, the `tx-sender` changes to the contract principal. Always capture the user's principal before entering the as-contract context:
+
+```clarity
+;; CORRECT: Capture user before as-contract
+(define-public (withdraw (amount uint))
+  (let (
+    (user tx-sender)  ;; Capture user first!
+  )
+    ;; ... validation logic ...
+    (try! (as-contract (stx-transfer? amount tx-sender user)))  ;; user is the recipient
+    (ok amount)
+  )
+)
+
+;; WRONG: Using tx-sender inside as-contract transfers to contract itself
+(try! (as-contract (stx-transfer? amount tx-sender tx-sender)))  ;; BUG: sends to self!
+```
+
+2. **Balance Verification Tests**: Always include tests that verify:
+   - User balances decrease after deposits
+   - User balances increase after withdrawals
+   - Contract balances change appropriately
+
+3. **Post-Conditions**: Use appropriate post-conditions in frontend to protect users from unexpected transfers.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to contribute to this project.
 
 ## Risk Factors
 
