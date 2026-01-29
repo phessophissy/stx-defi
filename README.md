@@ -44,39 +44,10 @@ A separate vault for users seeking yield on their STX holdings.
 
 ## Getting Started
 
-### Prerequisites
-- [Clarinet](https://github.com/hirosystems/clarinet) installed
-- Node.js 18+ installed
-- Stacks wallet with STX for deployment
 
-### Installation
-
-```bash
-# Clone the repository
-git clone <repository-url>
-cd stx-defi-protocol
-
-# Install dependencies
-npm install
-```
 
 ### Local Development
 
-```bash
-# Check contracts
-clarinet check
-
-# Run tests
-clarinet test
-
-# Start local console
-clarinet console
-```
-
-### Deployment
-
-1. Configure your deployer wallet in `settings/Mainnet.toml`
-2. Deploy contracts:
 
 ```bash
 clarinet deployments generate --mainnet
@@ -84,6 +55,7 @@ clarinet deployments apply --mainnet
 ```
 
 ## Contract Interactions
+deploy
 
 ### Core Pool
 
@@ -170,10 +142,5 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on how to contribute to th
 3. **Interest Rate Risk** - Fixed rates may not reflect market conditions
 4. **Liquidity Risk** - High utilization may prevent withdrawals
 
-## License
-
-MIT License
-
-## Disclaimer
 
 This protocol is provided as-is. Users should understand the risks involved in DeFi protocols before participating. Always do your own research (DYOR) and never invest more than you can afford to lose.
